@@ -1,0 +1,149 @@
+{
+	"_version": "1.7.0",
+	"start_url": "start.html",
+	"sap.app": {
+		"id": "com.overview.SO_Overview",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{app_title}}",
+		"description": "{{app_description}}",
+		"dataSources": {
+			"SalesOrder": {
+				"uri": "/sap/opu/odata/sap/ZSALESORDER_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/SalesOrder/metadata.xml",
+					"annotations": [
+						"Annot1",
+						"annotation2"
+					]
+				}
+			},
+			"Annot1": {
+				"type": "ODataAnnotation",
+				"uri": "Annotations/Annot1.xml",
+				"settings": {
+					"localUri": "Annotations/Annot1.xml"
+				}
+			},
+			"ZHCP_PO_APPROVAL_SRV": {
+				"uri": "/sap/opu/odata/sap/ZHCP_PO_APPROVAL_SRV/",
+				"type": "OData",
+				"settings": {
+					"localUri": "localService/metadata.xml"
+				}
+			},
+			"annotation2": {
+				"type": "ODataAnnotation",
+				"uri": "Annotations/annotation2.xml",
+				"settings": {
+					"localUri": "Annotations/annotation2.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponentForManifest",
+			"version": "0.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"dependencies": {
+			"minUI5Version": "${sap.ui5.dist.version}",
+			"libs": {
+				"sap.ovp": {}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"@i18n": {
+				"preload": true,
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			},
+			"SalesOrder": {
+				"dataSource": "SalesOrder",
+				"settings": {
+					"defaultCountMode": "Inline"
+				}
+			},
+			"": {
+				"type": "sap.ui.model.odata.v2.ODataModel",
+				"settings": {
+					"defaultOperationMode": "Server",
+					"defaultBindingMode": "OneWay",
+					"defaultCountMode": "Request"
+				},
+				"dataSource": "ZHCP_PO_APPROVAL_SRV",
+				"preload": true
+			}
+		},
+		"extends": {
+			"extensions": {}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		}
+	},
+	"sap.ovp": {
+		"globalFilterModel": "SalesOrder",
+		"globalFilterEntityType": "",
+		"containerLayout": "fixed",
+		"enableLiveFilter": true,
+		"considerAnalyticalParameters": true,
+		"cards": {
+			"card00": {
+				"model": "SalesOrder",
+				
+				"template": "sap.ovp.cards.charts.analytical",
+				"settings": {
+					"title": "{{CustomerList}}",
+					"subTitle": "{{Customer}}",
+					"entitySet": "CustomerSet",
+					"navigation": "dataPointNav",
+					"selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#bar",
+					"chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#bar",
+					"presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#bar",
+					"dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#bar",
+					"idenfiticationAnnotationPath": "com.sap.vocabularies.UI.v1.Identification#bar"
+				}
+			},
+			
+			"card02": {
+				"model": "SalesOrder",
+				"template": "sap.ovp.cards.charts.analytical",
+				"settings": {
+					"title": "{{CustomerList}}",
+					"subTitle": "{{Customer}}",
+					"entitySet": "ProductSet",
+					"navigation": "dataPointNav",
+					"selectionAnnotationPath": "com.sap.vocabularies.UI.v1.SelectionVariant#params",
+					"chartAnnotationPath": "com.sap.vocabularies.UI.v1.Chart#area",
+					"presentationAnnotationPath": "com.sap.vocabularies.UI.v1.PresentationVariant#params",
+					"dataPointAnnotationPath": "com.sap.vocabularies.UI.v1.DataPoint#params"
+				}
+			}
+		}
+	}
+}
