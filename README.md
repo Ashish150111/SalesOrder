@@ -10,3 +10,5 @@ $Adding Line in repository222
 Adding a line to erepository
 Adding a line to erepository
 Adding a line to erepository
+
+Adding a new line in GIT
